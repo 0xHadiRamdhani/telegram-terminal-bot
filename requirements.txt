@@ -1,0 +1,10 @@
+python-telegram-bot==20.7
+asyncio-subprocess==0.1.0
+python-nmap==0.7.1
+requests==2.31.0
+geopy==2.4.0
+cryptocompare==0.7.6
+aiohttp==3.9.1
+aiofiles==23.2.1
+cryptography==41.0.8
+python-dotenv==1.0.0
