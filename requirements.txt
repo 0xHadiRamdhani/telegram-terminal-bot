@@ -8,3 +8,9 @@ aiohttp==3.9.1
 aiofiles==23.2.1
 cryptography==41.0.8
 python-dotenv==1.0.0
+pymysql>=1.0.0
+psycopg2-binary>=2.8.0
+aiomysql>=0.1.0
+aiopg>=1.0.0
+pyjwt>=2.0.0
+cryptography>=3.4.0

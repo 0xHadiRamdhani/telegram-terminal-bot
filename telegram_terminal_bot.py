@@ -65,6 +65,18 @@ class SecureTerminalBot:
         
         # Configure crypto compare
         cryptocompare.cryptocompare._set_api_key_parameter(os.getenv('CRYPTO_API_KEY', ''))
+        
+        # Initialize Metasploit and security modules
+        self.sql_injection_tester = SQLInjectionTester()
+        self.ethical_hacking_utils = EthicalHackingUtils()
+        self.metasploit_generator = MetasploitPayloadGenerator(self)
+        self.av_evasion_utils = AVEvasionUtils()
+        self.automatic_compiler = AutomaticCompiler()
+        self.handler_listener = HandlerListener()
+        
+        # Initialize bot command handlers
+        self.metasploit_commands = MetasploitBotCommands(self.metasploit_generator)
+        self.compilation_commands = CompilationHandlerBotCommands(self.automatic_compiler, self.handler_listener)
 
     def is_authorized(self, user_id: int) -> bool:
         """Check if user is authorized to use the bot"""
@@ -599,9 +611,21 @@ def main():
     application.add_handler(CommandHandler("status", bot.status_command))
     application.add_handler(CommandHandler("exit", bot.exit_command))
     
+    # Metasploit payload generation commands
+    application.add_handler(CommandHandler("msfvenom", bot.metasploit_commands.cmd_msfvenom))
+    application.add_handler(CommandHandler("authorize_payload", bot.metasploit_commands.cmd_authorize_payload))
+    application.add_handler(CommandHandler("list_payloads", bot.metasploit_commands.cmd_list_payloads))
+    application.add_handler(CommandHandler("list_encoders", bot.metasploit_commands.cmd_list_encoders))
+    
+    # Compilation and handler commands
+    application.add_handler(CommandHandler("compile", bot.compilation_commands.cmd_compile))
+    application.add_handler(CommandHandler("start_handler", bot.compilation_commands.cmd_start_handler))
+    application.add_handler(CommandHandler("stop_handler", bot.compilation_commands.cmd_stop_handler))
+    application.add_handler(CommandHandler("handler_status", bot.compilation_commands.cmd_handler_status))
+
     # Handle terminal input
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, bot.handle_terminal_input))
-    
+
     # Handle callbacks
     application.add_handler(CallbackQueryHandler(bot.button_callback))
     

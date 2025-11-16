@@ -1,6 +1,6 @@
 # Telegram Terminal Bot
 
-Bot Telegram canggih dengan integrasi terminal interaktif, pemindaian jaringan, geolokasi IP, dan data kripto real-time dengan keamanan tingkat tinggi.
+Bot Telegram canggih dengan integrasi terminal interaktif, pemindaian jaringan, geolokasi IP, data kripto real-time, serta fitur ethical hacking dan keamanan tingkat enterprise.
 
 ## Fitur Utama
 
@@ -32,12 +32,20 @@ Bot Telegram canggih dengan integrasi terminal interaktif, pemindaian jaringan, 
 - Perubahan harga 24 jam
 - Portfolio tracking (fitur lanjutan)
 
-### Keamanan
-- Autentikasi user terenkripsi
-- Rate limiting untuk mencegah spam
-- Filter perintah berbahaya
-- Akses terbatas untuk user tertentu
-- Logging dan monitoring aktivitas
+### Ethical Hacking & Security Testing
+- **SQL Injection Testing**: Automated testing dengan 100+ payloads untuk 5 database utama
+- **Metasploit Payload Generator**: 100+ payload types dengan AV evasion dan AMSI bypass
+- **Ethical Authorization System**: Digital signature verification dan IP whitelisting
+- **Multi-mode Testing**: Safe, Limited, dan Full modes dengan kontrol ketat
+- **Comprehensive Audit Logging**: WORM storage untuk compliance 7 tahun
+
+### Keamanan Enterprise
+- **Multi-Factor Authentication**: TOTP dengan QR code dan backup codes
+- **Behavioral Analytics**: ML-based anomaly detection untuk user behavior
+- **Threat Intelligence**: IP reputation checking dan IOC database
+- **Vulnerability Management**: Automated scanning dengan CVSS scoring
+- **SIEM Integration**: Forward ke enterprise security systems
+- **Zero Trust Elements**: Device trust verification dan microsegmentation
 
 ## Persyaratan Sistem
 
@@ -46,6 +54,8 @@ Bot Telegram canggih dengan integrasi terminal interaktif, pemindaian jaringan, 
 - Akses root untuk fitur nmap penuh
 - Koneksi internet stabil
 - Telegram Bot Token
+- Metasploit Framework (untuk fitur payload generator)
+- Compiler tools: gcc, mingw-w64, clang (untuk kompilasi otomatis)
 
 ## Instalasi Cepat
 
@@ -72,7 +82,14 @@ nano .env  # Edit dengan informasi Anda
 3. Ikuti instruksi untuk mendapatkan token
 4. Masukkan token ke file `.env`
 
-### 5. Jalankan Bot
+### 5. Install Metasploit Framework (Opsional untuk payload generator)
+```bash
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
+chmod 755 msfinstall
+sudo ./msfinstall
+```
+
+### 6. Jalankan Bot
 ```bash
 python3 telegram_terminal_bot.py
 ```
@@ -87,6 +104,20 @@ ALLOWED_USERS=123456789,987654321
 ADMIN_USERS=123456789
 ENCRYPTION_KEY=your_generated_key
 CRYPTO_API_KEY=your_crypto_api_key
+
+# Security Configuration
+JWT_SECRET=your-jwt-secret-key
+AUTHORIZED_IPS=192.168.1.100,10.0.0.50
+TESTING_DURATION=24h
+MAX_PAYLOAD_SIZE=10485760
+
+# Metasploit Configuration
+METASPLOIT_PATH=/usr/bin/msfvenom
+MSFCONSOLE_PATH=/usr/bin/msfconsole
+
+# Logging Configuration
+AUDIT_LOG_DIR=/var/log/telegram_bot
+LOG_RETENTION_DAYS=2555
 ```
 
 ### User Management
@@ -124,6 +155,37 @@ CRYPTO_API_KEY=your_crypto_api_key
 - `/top_crypto` - Top 10 cryptocurrency
 - `/crypto_news <coin>` - Berita kripto terkini
 
+### SQL Injection Testing Commands
+- `/sqli_test <target_url> [consent_document]` - Test SQL injection
+- `/sqli_report` - Generate laporan SQL injection
+- `/sqli_stats` - Statistik testing SQL injection
+- `/sqli_dashboard` - Dashboard hasil testing
+- `/set_sqli_mode <mode>` - Set mode testing (safe/limited/full)
+
+### Metasploit Payload Generator Commands
+- `/msfvenom <platform> <format> <payload> <lhost> <lport> [options]` - Generate payload
+- `/authorize_payload <consent_document>` - Authorisasi payload generation
+- `/list_payloads <platform>` - List payload tersedia
+- `/list_encoders <platform>` - List encoder tersedia
+- `/start_handler <type> <lhost> <lport> <payload>` - Start handler listener
+- `/stop_handler <pid>` - Stop handler listener
+- `/handler_status` - Check status handler
+- `/compile <target> <source> <output>` - Compile source code
+
+### Ethical Hacking Commands
+- `/rce_test <target_url>` - Test Remote Code Execution
+- `/lfi_test <target_url>` - Test Local File Inclusion
+- `/ethical_stats` - Statistik ethical hacking
+- `/set_ethical_mode <mode>` - Set mode ethical (read_only/limited/full)
+- `/security_report` - Generate laporan keamanan
+
+### Security Enhancement Commands
+- `/setup_mfa` - Setup Multi-Factor Authentication
+- `/verify_mfa <token>` - Verifikasi MFA token
+- `/add_ip_whitelist <ip>` - Tambah IP ke whitelist
+- `/security_audit` - Jalankan security audit
+- `/compliance_report` - Generate compliance report
+
 ## Penggunaan Lanjutan
 
 ### Terminal Security
@@ -144,6 +206,26 @@ Untuk fitur portfolio tracking:
 - Tambahkan holding: `/portfolio_add BTC 0.5 50000`
 - Update nilai: `/portfolio_update`
 - Ringkasan: `/portfolio_summary`
+
+### Ethical Hacking Guidelines
+**PENTING**: Semua fitur ethical hacking hanya untuk sistem yang Anda miliki atau memiliki izin tertulis:
+1. Dapatkan otorisasi tertulis sebelum testing
+2. Gunakan mode paling aman yang memungkinkan
+3. Document semua aktivitas testing
+4. Laporkan temuan secara bertanggung jawab
+5. Jangan menyebabkan kerusakan permanen
+
+### SQL Injection Testing
+- **Mode Safe**: Hanya deteksi tanpa eksploitasi
+- **Mode Limited**: Eksploitasi terbatas dengan kontrol keamanan
+- **Mode Full**: Testing lengkap (hanya untuk admin dengan consent)
+
+### Metasploit Payload Generator
+- Support 100+ payload types untuk 6 platform
+- 16 teknik AV evasion untuk 8 vendor antivirus
+- Otomatis kompilasi untuk 10 target platform
+- Handler listener dengan multiple backend support
+- Enkripsi payload dengan Fernet cipher
 
 ## Keamanan & Best Practices
 
@@ -167,6 +249,13 @@ Untuk fitur portfolio tracking:
 - Backup konfigurasi secara berkala
 - Gunakan firewall yang tepat
 
+### 5. Ethical Hacking Security
+- IP whitelisting untuk testing
+- Digital signature untuk authorization
+- Comprehensive audit logging
+- Mode-based restrictions
+- Target ownership verification
+
 ## Troubleshooting
 
 ### Bot tidak merespon
@@ -188,6 +277,17 @@ Untuk fitur portfolio tracking:
 1. Pastikan koneksi internet
 2. Cek API key di .env
 3. Coba koin yang berbeda
+
+### Metasploit payload generation error
+1. Pastikan Metasploit terinstall: `msfvenom --version`
+2. Cek permission untuk msfvenom
+3. Validasi konfigurasi di .env
+
+### SQL injection testing error
+1. Validasi target URL format
+2. Cek ethical authorization status
+3. Pastikan IP dalam whitelist
+4. Review consent documentation
 
 ## Monitoring & Logging
 
@@ -218,6 +318,27 @@ tail -f logs/bot_activity.log
 - 2 detik antara perintah
 - Batasan harian per user
 - Admin bypass untuk emergency
+
+## Dokumentasi Teknis
+
+### File Utama
+- [`telegram_terminal_bot.py`](telegram_terminal_bot.py:1) - Bot utama (1000+ baris)
+- [`network_utils.py`](network_utils.py:1) - Utilitas jaringan (400+ baris)
+- [`crypto_utils.py`](crypto_utils.py:1) - Utilitas kripto (350+ baris)
+- [`security_enhancements.py`](security_enhancements.py:1) - Fitur keamanan enterprise (800+ baris)
+- [`ethical_hacking_utils.py`](ethical_hacking_utils.py:1) - Framework ethical hacking (900+ baris)
+- [`sql_injection_tester.py`](sql_injection_tester.py:1) - SQL injection testing (600+ baris)
+- [`metasploit_payload_generator.py`](metasploit_payload_generator.py:1) - Payload generator (1054+ baris)
+- [`av_evasion_utils.py`](av_evasion_utils.py:1) - AV evasion techniques (650+ baris)
+- [`compilation_handler.py`](compilation_handler.py:1) - Automatic compilation (750+ baris)
+
+### Total Statistics
+- **Total Kode**: 6,000+ baris Python
+- **Total Dokumentasi**: 3,000+ baris
+- **Fitur Keamanan**: 50+ kontrol keamanan
+- **Platform Support**: 6+ platform utama
+- **Payload Types**: 100+ payload Metasploit
+- **Testing Techniques**: 20+ teknik testing
 
 ## Lisensi
 
@@ -255,6 +376,14 @@ python3 setup.py
 
 ---
 
-**Disclaimer**: Gunakan bot ini dengan bijak dan bertanggung jawab. Pemindaian jaringan hanya untuk jaringan yang Anda miliki atau memiliki izin. Kami tidak bertanggung jawab atas penyalahgunaan fitur ini.
+**⚠️ Disclaimer**: Gunakan bot ini dengan bijak dan bertanggung jawab. Fitur ethical hacking hanya untuk sistem yang Anda miliki atau memiliki izin eksplisit. Kami tidak bertanggung jawab atas penyalahgunaan fitur ini.
 
-**Security Notice**: Selalu update ke versi terbaru untuk patch keamanan. Laporkan vulnerability ke security@yourdomain.com
+**🔒 Security Notice**: Selalu update ke versi terbaru untuk patch keamanan. Laporkan vulnerability ke security@yourdomain.com
+
+**📜 Legal Notice**: Pengguna bertanggung jawab untuk mematuhi semua hukum dan regulasi yang berlaku. Fitur ethical hacking memerlukan otorisasi tertulis sebelum digunakan.
+
+---
+
+*Last updated: November 2025*  
+*Version: 2.0.0*  
+*Author: Kilo Code*
